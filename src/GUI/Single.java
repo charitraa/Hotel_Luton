@@ -25,7 +25,7 @@ public class Single extends JFrame implements ActionListener {
 	JDateChooser  checkindate , checkoutdate;
 	JButton book , back;
 	JTextField type,prise;
-	JComboBox num ;
+	JComboBox num ,rooms ;
 	public Single() {
 		setTitle("Single booking page");
 		setSize(500,500);
@@ -68,17 +68,18 @@ public class Single extends JFrame implements ActionListener {
 		add(checkoutdate);
 		
 		String types[] = {}; 
-		JComboBox room = new JComboBox(types);
-		room.setBounds(130,320,120,30);
-		add(room);
+		rooms = new JComboBox(types);
+		rooms.setBounds(130,320,120,30);
+		add(rooms);
 		
 		book = new JButton("Book");
-		book.setBounds(80,370,150,30);
+		book.setBounds(80,390,150,30);
 		book.addActionListener(this);
 		add(book);
 		
 		back = new JButton("Back");
-		back.setBounds(260,370,150,30);
+		back.setBounds(260,390,150,30);
+		back.addActionListener(this);
 		add(back);
 		
 		number = new JLabel("Number of Guest:");
@@ -117,8 +118,9 @@ public class Single extends JFrame implements ActionListener {
 		String checkin = ((JTextField)checkindate.getDateEditor().getUiComponent()).getText();
 		String checkout =((JTextField)checkoutdate.getDateEditor().getUiComponent()).getText();
 		String bookingstatus = "pending";
+		String rooom = rooms.getSelectedItem().toString();
 		
-		BookingMiddleWare booking = new BookingMiddleWare(bookingId,number,checkin,checkout,bookingstatus);
+		BookingMiddleWare booking = new BookingMiddleWare(bookingId,number,checkin,checkout,bookingstatus,rooom );
 		boolean result = new Contollers().book(booking);
 		
 //		int uid = 0;
@@ -139,6 +141,9 @@ public class Single extends JFrame implements ActionListener {
 
 		}
 
+		}
+		if(e.getSource()==back) {
+			this.dispose();
 		}
 	}
 

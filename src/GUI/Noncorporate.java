@@ -308,7 +308,7 @@ public class Noncorporate extends JFrame implements ActionListener{
 					password.getText().length()==0) {
 				JOptionPane.showMessageDialog(null, "Pls fill the registration form proberly");
 			}
-			else if(firsttxt.getText().length()==0 || lastname.getText().length()==0 || middletxt.getText().length()==0 ||
+			else if(firsttxt.getText().length()==0 || lastname.getText().length()==0||
 					((JTextField)dob.getDateEditor().getUiComponent()).getText().isEmpty()|| 
 					countrytxt.getText().length()==0 || addresstxt.getText().length()==0 || phonetxt.getText().length()==0 || 
 					 emailtxt.getText().length()==0 || male.getText().isEmpty() || female.getText().isEmpty() || other.getText().isEmpty()||

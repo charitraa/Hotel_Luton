@@ -265,21 +265,35 @@ public class Corporate extends JFrame implements ActionListener{
 			String cvc = cvcNo.getText();
 			String email = emailtxt.getText();
 			String pass = password.getText();
-			CorporateMiddleWare corporate = new CorporateMiddleWare(corporateId,name,date,country,address,phone,creditNo,cvc,email,pass);
-			boolean result = new Contollers().register(corporate);
-			
-			int uid = 0;
 			String emaill = emailtxt.getText();
+			int uid = 0;
+			String emails = emailtxt.getText();
 			String passs = password.getText();
-			UserMiddleWare Login = new UserMiddleWare( uid,emaill,passs);
+			UserMiddleWare Login = new UserMiddleWare( uid,emails,passs);
 			boolean result1 = new Contollers().login(Login);
-			
-			
-			
-			if (result1 == true && result ==true) {
+			if (result1 ==true) {
 
+				JOptionPane.showMessageDialog(null, "Register successfully");
+//				Booking book = new Booking();
+				companytxt.setText("");
+				dob.setToolTipText("");
+				countrytxt.setText("");
+				addresstxt.setText("");
+				phonetxt.setText("");
+				creditCardNo.setText("");
+				emailtxt.setText("");
+				password.setText(""); 
+				} else {
+
+				JOptionPane.showMessageDialog(null, "Failed to Register");
+
+				}
+				CorporateMiddleWare corporate = new CorporateMiddleWare(corporateId,name,date,country,address,phone,creditNo,cvc,email,pass,emaill);
+				boolean result = new Contollers().register(corporate);
+				
+			if (result == true) {
 			JOptionPane.showMessageDialog(null, "Register successfully");
-			Booking book = new Booking();
+//			Booking book = new Booking();
 			companytxt.setText("");
 			dob.setToolTipText("");
 			countrytxt.setText("");

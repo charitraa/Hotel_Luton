@@ -48,6 +48,4 @@ public class Contollers {
 		this.user = new Jdbc().login(this.user);
 	}
 	
-	
-	
 }
