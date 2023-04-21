@@ -288,11 +288,11 @@ public class Corporate extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Failed to Register");
 
 				}
-				CorporateMiddleWare corporate = new CorporateMiddleWare(corporateId,name,date,country,address,phone,creditNo,cvc,email,pass,emaill);
+				CorporateMiddleWare corporate = new CorporateMiddleWare(corporateId,name,date,country,address,phone,creditNo,cvc);
 				boolean result = new Contollers().register(corporate);
 				
 			if (result == true) {
-			JOptionPane.showMessageDialog(null, "Register successfully");
+			JOptionPane.showMessageDialog(null, "Your account is active");
 //			Booking book = new Booking();
 			companytxt.setText("");
 			dob.setToolTipText("");
@@ -304,7 +304,7 @@ public class Corporate extends JFrame implements ActionListener{
 			password.setText(""); 
 			} else {
 
-			JOptionPane.showMessageDialog(null, "Failed to Register");
+			JOptionPane.showMessageDialog(null, "something you missed");
 
 			}
 

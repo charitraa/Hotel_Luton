@@ -299,6 +299,7 @@ public class Noncorporate extends JFrame implements ActionListener{
 		if(e.getSource()==back) {
 			this.dispose();
 			
+			
 		}
 		if(e.getSource()==register) {
 			if(firsttxt.getText().length()==0 && lastname.getText().length()==0 && middletxt.getText().length()==0 &&
@@ -342,18 +343,36 @@ public class Noncorporate extends JFrame implements ActionListener{
 			}
 			String email = emailtxt.getText();
 			String pass = password.getText();
-			
-			NonCorporateMiddleWare Noncorporate = new NonCorporateMiddleWare(customerId, firstname, secondname, lastnam, date, country, address, phone, sex, email,pass);
-			boolean result = new Contollers().register1(Noncorporate);
-			
 			int uid = 0;
 			String emaill = emailtxt.getText();
 			String passs = password.getText();
 			UserMiddleWare Login = new UserMiddleWare( uid,emaill,passs);
 			boolean result1 = new Contollers().login(Login);
-			if (result == true && result1 == true) {
+			if(result1 == true) {
+				JOptionPane.showMessageDialog(null, "Register successfully");
+				
+				firsttxt.setText("");
+				middletxt.setText("");
+				lastname.setText("");
+				dob.setToolTipText("");
+				countrytxt.setText("");
+				addresstxt.setText("");
+				phonetxt.setText("");
+				emailtxt.setText("");
+				password.setText(""); 
+				} else {
 
-			JOptionPane.showMessageDialog(null, "Register successfully");
+				JOptionPane.showMessageDialog(null, "Failed to Register");
+
+				}
+			
+			
+			NonCorporateMiddleWare Noncorporate = new NonCorporateMiddleWare(customerId, firstname, secondname, lastnam, date, country, address, phone, sex, email,pass);
+			boolean result = new Contollers().register1(Noncorporate);
+			
+			 if(result == true ) {
+
+			JOptionPane.showMessageDialog(null, "your account is active");
 			
 			firsttxt.setText("");
 			middletxt.setText("");
@@ -363,7 +382,9 @@ public class Noncorporate extends JFrame implements ActionListener{
 			addresstxt.setText("");
 			phonetxt.setText("");
 			emailtxt.setText("");
-			password.setText(""); 
+			password.setText("");
+			this.dispose();
+			Login log = new Login();
 			} else {
 
 			JOptionPane.showMessageDialog(null, "Failed to Register");
@@ -372,7 +393,7 @@ public class Noncorporate extends JFrame implements ActionListener{
 
 			}
 
-			
+		
 	}
 	}
 	}

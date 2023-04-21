@@ -1,17 +1,18 @@
 package GUI;
 
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.charset.CharsetDecoder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
@@ -67,9 +68,13 @@ public class Single extends JFrame implements ActionListener {
 		checkoutdate.setBounds(180,220,150,30);
 		add(checkoutdate);
 		
-		String types[] = {}; 
-		rooms = new JComboBox(types);
+		rooms = new JComboBox();
 		rooms.setBounds(130,320,120,30);
+		
+		ArrayList roomm = new Jdbc().getRoom1();
+		for(int i = 0; i<roomm.size();i++) {
+			rooms.addItem(roomm.get(i));
+		}
 		add(rooms);
 		
 		book = new JButton("Book");
@@ -122,24 +127,35 @@ public class Single extends JFrame implements ActionListener {
 		
 		BookingMiddleWare booking = new BookingMiddleWare(bookingId,number,checkin,checkout,bookingstatus,rooom );
 		boolean result = new Contollers().book(booking);
-		
-//		int uid = 0;
-//		String emaill = emailtxt.getText();
-//		String passs = password.getText();
-//		UserMiddleWare Login = new UserMiddleWare( uid,emaill,passs);
-//		boolean result1 = new Contollers().login(Login);
-		
-		
-		
 		if (result ==true) {
 
-		JOptionPane.showMessageDialog(null, "Booking sucessfull");
- 
+			JOptionPane.showMessageDialog(null, "Booking sucessfull");
+			String sql = "UPDATE Room SET Room_Status = ? WHERE Room_NO = ? ";
+			try {
+				//connect
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/hotel_luton", "root","");
+				
+				PreparedStatement pstat = conn.prepareStatement(sql);
+				pstat.setString(1, "Book");
+				pstat.setString(2, rooms.getSelectedItem().toString());
+				//run sql statement
+				pstat.executeUpdate();
+				pstat.close();
+				
+				conn.close();
+				
+				}
+			
+			catch(Exception ex) {
+				System.out.println("Error : "+ex.getMessage());
+			}
 		} else {
 
-		JOptionPane.showMessageDialog(null, "Failed to Register");
-
+		JOptionPane.showMessageDialog(null, "Failed to Book");
 		}
+			
+		
+	
 
 		}
 		if(e.getSource()==back) {

@@ -1,8 +1,9 @@
 package Middleware;
 
 public class UserMiddleWare {
-	public String email,password;
-	public int uid;
+	public static String email;
+	public static String password;
+	public static int uid;
 	public UserMiddleWare() {
 		this.uid=0;
 		this.email = "";
@@ -15,7 +16,7 @@ public class UserMiddleWare {
 		this.password = password;
 	}
 
-	public String getEmail() {
+	public static String getEmail() {
 		return email;
 	}
 
@@ -23,7 +24,7 @@ public class UserMiddleWare {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public static String getPassword() {
 		return password;
 	}
 
@@ -31,7 +32,7 @@ public class UserMiddleWare {
 		this.password = password;
 	}
 
-	public int getUid() {
+	public static int getUid() {
 		return uid;
 	}
 

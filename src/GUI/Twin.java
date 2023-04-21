@@ -3,6 +3,10 @@ package GUI;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +18,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import JDBC.Contollers;
+import JDBC.Jdbc;
 import Middleware.BookingMiddleWare;
 
 public class Twin extends JFrame implements ActionListener {
@@ -21,7 +26,7 @@ public class Twin extends JFrame implements ActionListener {
 	JDateChooser  checkindate , checkoutdate;
 	JButton book , back;
 	JTextField type,prise;
-	JComboBox num;
+	JComboBox num , rooms ;
 	public Twin() {
 		setTitle("Twin booking page");
 		setSize(500,500);
@@ -62,13 +67,19 @@ public class Twin extends JFrame implements ActionListener {
 		checkoutdate.setBounds(180,220,150,30);
 		add(checkoutdate);
 		
-		String types[] = {}; 
-		JComboBox room = new JComboBox(types);
-		room.setBounds(130,320,120,30);
-		add(room);
+		rooms = new JComboBox();
+		rooms.setBounds(130,320,120,30);
+		add(rooms);
+		
+		ArrayList roomm = new Jdbc().getRoom();
+		for(int i = 0; i<roomm.size();i++) {
+			rooms.addItem(roomm.get(i));
+		}
+		
 		
 		book = new JButton("Book");
 		book.setBounds(80,370,150,30);
+		book.addActionListener(this);
 		add(book);
 		
 		back = new JButton("Back");
@@ -109,8 +120,8 @@ public class Twin extends JFrame implements ActionListener {
 			String checkin = ((JTextField)checkindate.getDateEditor().getUiComponent()).getText();
 			String checkout =((JTextField)checkoutdate.getDateEditor().getUiComponent()).getText();
 			String bookingstatus = "pending";
-			
-			BookingMiddleWare booking = new BookingMiddleWare(bookingId,number,checkin,checkout,bookingstatus);
+			String rooom = rooms.getSelectedItem().toString();
+			BookingMiddleWare booking = new BookingMiddleWare(bookingId,number,checkin,checkout,bookingstatus, rooom);
 			boolean result = new Contollers().book(booking);
 			
 //			int uid = 0;
@@ -123,14 +134,32 @@ public class Twin extends JFrame implements ActionListener {
 			
 			if (result ==true) {
 
-			JOptionPane.showMessageDialog(null, "Booking sucessfull");
-	 
+				JOptionPane.showMessageDialog(null, "Booking sucessfull");
+				String sql = "UPDATE Room SET Room_Status = ? WHERE Room_NO = ? ";
+				try {
+					//connect
+					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/hotel_luton", "root","");
+					
+					PreparedStatement pstat = conn.prepareStatement(sql);
+					pstat.setString(1, "Book");
+					pstat.setString(2, rooms.getSelectedItem().toString());
+					//run sql statement
+					pstat.executeUpdate();
+					pstat.close();
+					
+					conn.close();
+					
+					}
+				
+				catch(Exception ex) {
+					System.out.println("Error : "+ex.getMessage());
+				}
+
 			} else {
 
-			JOptionPane.showMessageDialog(null, "Failed to Register");
-
+			JOptionPane.showMessageDialog(null, "Failed to Book");
 			}
-
+			
 			}
 		if(e.getSource()==back) {
 			this.dispose();

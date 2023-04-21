@@ -184,6 +184,7 @@ public class Login extends JFrame implements ActionListener {
 			else if(user.getUid()>=1) {
 				JOptionPane.showMessageDialog(this, "Welcome to hotel luton!");
 				Booking book = new Booking();
+				this.dispose();
 				
 			}
 			else {

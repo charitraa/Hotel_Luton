@@ -85,6 +85,7 @@ public class HomePage extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==buttonSign) {
+			this.dispose();
 			Login page = new Login();
 			
 		

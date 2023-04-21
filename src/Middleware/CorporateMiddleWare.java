@@ -12,12 +12,9 @@ public class CorporateMiddleWare {
 		this.phonenumber = "";
 		this.creditCard = "";
 		this.cvc = "";
-		this.email = "";
-		this.password = "";
-		this.femail = "";
 	}
 	public CorporateMiddleWare(int corporateId, String name, String date, String country, String address, String phonenumber, String creditCard,
-			String cvc, String email, String password, String femail) {
+			String cvc) {
 		
 		this.corporateId=corporateId;
 		this.name = name;
@@ -27,9 +24,7 @@ public class CorporateMiddleWare {
 		this.phonenumber = phonenumber;
 		this.creditCard = creditCard;
 		this.cvc = cvc;
-		this.email = email;
-		this.password = password;
-		this.femail = femail;
+
 	}
 	public String getName() {
 		return name;
