@@ -25,8 +25,7 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 
 import com.toedter.calendar.JDateChooser;
-
-import JDBC.Contollers;
+import JDBC.Jdbc;
 import Middleware.UserMiddleWare;
 import Middleware.NonCorporateMiddleWare;
 
@@ -45,7 +44,7 @@ public class Noncorporate extends JFrame implements ActionListener{
 	
 	public Noncorporate() {
 		//make the whole Screen White
-		getContentPane().setBackground(Color.WHITE);
+		getContentPane().setBackground(Color.decode("#667579"));
 //..................Add Frame......................
 		setTitle("Register Page");
 		setSize(500,600);
@@ -339,15 +338,12 @@ public class Noncorporate extends JFrame implements ActionListener{
 			} else if (other.isSelected()) {
 
 				sex = "Other";
-
 			}
-			String email = emailtxt.getText();
-			String pass = password.getText();
 			int uid = 0;
 			String emaill = emailtxt.getText();
 			String passs = password.getText();
-			UserMiddleWare Login = new UserMiddleWare( uid,emaill,passs);
-			boolean result1 = new Contollers().login(Login);
+			UserMiddleWare Login = new UserMiddleWare( uid, emaill,passs);
+			boolean result1 = new Jdbc().logins(Login);
 			if(result1 == true) {
 				JOptionPane.showMessageDialog(null, "Register successfully");
 				
@@ -365,11 +361,8 @@ public class Noncorporate extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Failed to Register");
 
 				}
-			
-			
-			NonCorporateMiddleWare Noncorporate = new NonCorporateMiddleWare(customerId, firstname, secondname, lastnam, date, country, address, phone, sex, email,pass);
-			boolean result = new Contollers().register1(Noncorporate);
-			
+			NonCorporateMiddleWare Noncorporate = new NonCorporateMiddleWare(firstname, secondname, lastnam, date, country, address, phone, sex);
+			boolean result = new Jdbc().register1(Noncorporate);			
 			 if(result == true ) {
 
 			JOptionPane.showMessageDialog(null, "your account is active");
@@ -390,12 +383,13 @@ public class Noncorporate extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(null, "Failed to Register");
 
 			}
-
 			}
+			
 
 		
 	}
 	}
 	}
+	
 	
 

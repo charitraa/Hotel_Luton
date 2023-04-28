@@ -19,7 +19,8 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import JDBC.Contollers;
+
+import JDBC.Jdbc;
 import Middleware.*;
 
 public class Corporate extends JFrame implements ActionListener{
@@ -31,7 +32,7 @@ public class Corporate extends JFrame implements ActionListener{
 	JPasswordField password;
 	ButtonGroup group;
 	public Corporate() {
-		getContentPane().setBackground(Color.WHITE);
+		getContentPane().setBackground(Color.decode("#888789"));
 		setTitle("Register Page");
 		setSize(500,600);
 		setLayout(null);
@@ -159,16 +160,23 @@ public class Corporate extends JFrame implements ActionListener{
 //		});
 		
 		register = new  JButton("Continue");
+		register.setBackground(Color.decode("#505457"));
+		register.setForeground(Color.WHITE);
+		register.setFocusPainted(false);
+		//register.setBorderPainted(false);
 		register.setBounds(71,490,150,30);
 		register.addActionListener(this);
-		register.setOpaque(false);
+		
 		register.setCursor(cus);
 
 		
 		back = new JButton("Back");
+		back.setBackground(Color.decode("#505457"));
+		back.setForeground(Color.WHITE);
+		back.setFocusPainted(false);
 		back.setBounds(250,490, 150,30);
 		back.addActionListener(this);
-		back.setOpaque(false);
+		//back.setOpaque(false);
 		back.setCursor(cus);
 
 		add(back);
@@ -263,14 +271,13 @@ public class Corporate extends JFrame implements ActionListener{
 			String phone = phonetxt.getText();
 			String creditNo = creditCardNo.getText();
 			String cvc = cvcNo.getText();
-			String email = emailtxt.getText();
-			String pass = password.getText();
-			String emaill = emailtxt.getText();
+
+
 			int uid = 0;
 			String emails = emailtxt.getText();
 			String passs = password.getText();
-			UserMiddleWare Login = new UserMiddleWare( uid,emails,passs);
-			boolean result1 = new Contollers().login(Login);
+			UserMiddleWare Login = new UserMiddleWare( uid, emails,passs);
+			boolean result1 = new Jdbc().logins(Login);
 			if (result1 ==true) {
 
 				JOptionPane.showMessageDialog(null, "Register successfully");
@@ -288,8 +295,8 @@ public class Corporate extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Failed to Register");
 
 				}
-				CorporateMiddleWare corporate = new CorporateMiddleWare(corporateId,name,date,country,address,phone,creditNo,cvc);
-				boolean result = new Contollers().register(corporate);
+				CorporateMiddleWare corporate = new CorporateMiddleWare(name,date,country,address,phone,creditNo,cvc);
+				boolean result = new Jdbc().register(corporate);
 				
 			if (result == true) {
 			JOptionPane.showMessageDialog(null, "Your account is active");

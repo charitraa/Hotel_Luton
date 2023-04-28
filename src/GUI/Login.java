@@ -182,9 +182,12 @@ public class Login extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null,"Pls enter your Password");
 			}
 			else if(user.getUid()>=1) {
+				test.userid = user.getUid();
 				JOptionPane.showMessageDialog(this, "Welcome to hotel luton!");
-				Booking book = new Booking();
 				this.dispose();
+				Booking book = new Booking();
+				
+				
 				
 			}
 			else {

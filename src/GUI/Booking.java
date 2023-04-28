@@ -32,7 +32,9 @@ public class Booking extends JFrame implements ActionListener {
 		single = new JPanel();
 		single.setBackground(Color.WHITE);
 		single.setBounds( 40,95,900,200);
+		
 		add(single);
+		
 		
 		dueo = new JPanel();
 		dueo.setBackground(Color.WHITE);
@@ -68,8 +70,8 @@ public class Booking extends JFrame implements ActionListener {
 		lsingle.setFont(new Font("serif",Font.BOLD,30));
 		single.add(lsingle);
 		
-		fsingle = new JLabel("<html> <p> ddddddddd </p> </html>");
-		fsingle.setBounds(400,70,250,200);
+		fsingle = new JLabel("<html> <p> ONE BED <br> ONE LED TV AND FREE WIFI <br> ATTACHED TOILET BATHROOM WITH HOT WATER <br> Price:2000 </p> </html>");
+		fsingle.setBounds(400,10,250,200);
 		single.add(fsingle);
 		
 		doubleimage = new JLabel();
@@ -82,8 +84,8 @@ public class Booking extends JFrame implements ActionListener {
 		ldouble.setBounds(400,10,200,50);
 		ldouble.setFont(new Font("serif",Font.BOLD,30));
 		dueo.add(ldouble);
-		fdueo = new JLabel("<html> <p> ddddddddd </p> </html>");
-		fdueo.setBounds(400,70,250,200);
+		fdueo = new JLabel("<html> <p> ONE QUEEN SIZE BED <br> ONE LED TV AND FREE WIFI <br> ATTACHED TOILET BATHROOM WITH JACUZZI <br> Price:4000  </p> </html>");
+		fdueo.setBounds(400,10,250,200);
 		dueo.add(fdueo);
 		
 		
@@ -97,8 +99,8 @@ public class Booking extends JFrame implements ActionListener {
 		ltwin.setBounds(400,10,150,50);
 		ltwin.setFont(new Font("serif",Font.BOLD,30));
 		twin.add(ltwin);
-		ftwin = new JLabel("<html> <p> ddddddddd </p> </html>");
-		ftwin.setBounds(400,70,250,200);
+		ftwin = new JLabel("<html> <p> TWO QUEEN SIZE BED <br> SOFA BALCONY VIEW <bc>ONE LED TV AND FREE WIFI <br> ATTACHED TOILET BATHROOM WITH JACUZZI AND A BATH TUB <br> Price:8000  </p> </html>");
+		ftwin.setBounds(400,10,250,200);
 		twin.add(ftwin);
 		
 		sinbook = new JButton("Book Now");

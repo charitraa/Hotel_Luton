@@ -50,9 +50,9 @@ public class Single extends JFrame implements ActionListener {
 		checkout.setBounds(80,220,150,30);
 		add(checkout);
 		
-		room = new JLabel("Room:");
-		room.setBounds(80,320,150,30);
-		add(room);
+//		room = new JLabel("Room:");
+//		room.setBounds(80,320,150,30);
+//		add(room);
 		
       	type = new JTextField("Single")
 ;		type.setBounds(160,120,100,30);
@@ -67,15 +67,15 @@ public class Single extends JFrame implements ActionListener {
 		checkoutdate = new JDateChooser();
 		checkoutdate.setBounds(180,220,150,30);
 		add(checkoutdate);
-		
-		rooms = new JComboBox();
-		rooms.setBounds(130,320,120,30);
-		
-		ArrayList roomm = new Jdbc().getRoom1();
-		for(int i = 0; i<roomm.size();i++) {
-			rooms.addItem(roomm.get(i));
-		}
-		add(rooms);
+//		
+//		rooms = new JComboBox();
+//		rooms.setBounds(130,320,120,30);
+//		
+//		ArrayList roomm = new Jdbc().getRoom1();
+//		for(int i = 0; i<roomm.size();i++) {
+//			rooms.addItem(roomm.get(i));
+//		}
+//		add(rooms);
 		
 		book = new JButton("Book");
 		book.setBounds(80,390,150,30);
@@ -97,12 +97,12 @@ public class Single extends JFrame implements ActionListener {
 		add(num);
 		
 		prize = new JLabel("Prize:");
-		prize.setBounds(270, 320, 100 ,30);
+		prize.setBounds(80,320,150,30);
 		add(prize);
 		
 		prise = new JTextField("2000");
 		prise.setEnabled(false);
-		prise.setBounds(310,320,100,30);
+		prise.setBounds(130,320,100,30);
 		add(prise);
 		
 		setVisible(true);
@@ -118,37 +118,39 @@ public class Single extends JFrame implements ActionListener {
 
 		
 		if(e.getSource()==book) {
-		int bookingId = 0;
-		String number = num.getSelectedItem().toString();
-		String checkin = ((JTextField)checkindate.getDateEditor().getUiComponent()).getText();
-		String checkout =((JTextField)checkoutdate.getDateEditor().getUiComponent()).getText();
-		String bookingstatus = "pending";
-		String rooom = rooms.getSelectedItem().toString();
 		
-		BookingMiddleWare booking = new BookingMiddleWare(bookingId,number,checkin,checkout,bookingstatus,rooom );
-		boolean result = new Contollers().book(booking);
-		if (result ==true) {
-
-			JOptionPane.showMessageDialog(null, "Booking sucessfull");
-			String sql = "UPDATE Room SET Room_Status = ? WHERE Room_NO = ? ";
-			try {
-				//connect
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/hotel_luton", "root","");
-				
-				PreparedStatement pstat = conn.prepareStatement(sql);
-				pstat.setString(1, "Book");
-				pstat.setString(2, rooms.getSelectedItem().toString());
-				//run sql statement
-				pstat.executeUpdate();
-				pstat.close();
-				
-				conn.close();
-				
-				}
+			int id = 0;
+			String number = num.getSelectedItem().toString();
+			String checkin = ((JTextField)checkindate.getDateEditor().getUiComponent()).getText();
+			String checkout =((JTextField)checkoutdate.getDateEditor().getUiComponent()).getText();
+			String bookingstatus = "pending";
+			String RoomType = type.getText();
 			
-			catch(Exception ex) {
-				System.out.println("Error : "+ex.getMessage());
-			}
+			BookingMiddleWare booking = new BookingMiddleWare(id, number,checkin,checkout,bookingstatus, RoomType);
+			boolean result = new Jdbc().book(booking);
+		if (result ==true) {
+			
+			JOptionPane.showMessageDialog(null, "Booking sucessfull");
+			this.dispose();
+//			String sql = "UPDATE Room SET Room_Status = ? WHERE Room_NO = ? ";
+//			try {
+//				//connect
+//				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/hotel_luton", "root","");
+//				
+//				PreparedStatement pstat = conn.prepareStatement(sql);
+//				pstat.setString(1, "Book");
+//				pstat.setString(2, rooms.getSelectedItem().toString());
+//				//run sql statement
+//				pstat.executeUpdate();
+//				pstat.close();
+//				
+//				conn.close();
+//				
+//				}
+//			
+//			catch(Exception ex) {
+//				System.out.println("Error : "+ex.getMessage());
+//			}
 		} else {
 
 		JOptionPane.showMessageDialog(null, "Failed to Book");
