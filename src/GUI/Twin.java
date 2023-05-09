@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +22,7 @@ import com.toedter.calendar.JDateChooser;
 
 import JDBC.Jdbc;
 import Middleware.BookingMiddleWare;
-import Middleware.roomMiddleWare;
+
 
 public class Twin extends JFrame implements ActionListener {
 	JLabel booking, roomtype, checkin, checkout, room, number,prize;
@@ -29,7 +31,9 @@ public class Twin extends JFrame implements ActionListener {
 	JTextField type,prise;
 	JComboBox num , rooms ;
 	public Twin() {
+		Cursor cus = new Cursor(Cursor.HAND_CURSOR);
 		setTitle("Twin booking page");
+		getContentPane().setBackground(Color.decode("#93917C"));
 		setSize(500,500);
 		setLayout(null);
 		setUndecorated(true);
@@ -68,23 +72,17 @@ public class Twin extends JFrame implements ActionListener {
 		checkoutdate.setBounds(180,220,150,30);
 		add(checkoutdate);
 		
-//		rooms = new JComboBox();
-//		rooms.setBounds(130,320,120,30);
-//		add(rooms);
-//		
-//		ArrayList roomm = new Jdbc().getRoom();
-//		for(int i = 0; i<roomm.size();i++) {
-//			rooms.addItem(roomm.get(i));
-//		}
-		
-		
 		book = new JButton("Book");
+		book.setCursor(cus);
 		book.setBounds(80,370,150,30);
+		book.setBackground(Color.WHITE);
 		book.addActionListener(this);
 		add(book);
 		
 		back = new JButton("Back");
+		back.setCursor(cus);
 		back.setBounds(260,370,150,30);
+		back.setBackground(Color.WHITE);
 		back.addActionListener(this);
 		add(back);
 		

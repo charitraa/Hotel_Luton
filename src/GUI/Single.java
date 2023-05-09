@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +30,9 @@ public class Single extends JFrame implements ActionListener {
 	JTextField type,prise;
 	JComboBox num ,rooms ;
 	public Single() {
+		Cursor cus = new Cursor(Cursor.HAND_CURSOR);
 		setTitle("Single booking page");
+		getContentPane().setBackground(Color.decode("#93917C"));
 		setSize(500,500);
 		setLayout(null);
 		setUndecorated(true);
@@ -79,11 +83,15 @@ public class Single extends JFrame implements ActionListener {
 		
 		book = new JButton("Book");
 		book.setBounds(80,390,150,30);
+		book.setCursor(cus);
+		book.setBackground(Color.WHITE);
 		book.addActionListener(this);
 		add(book);
 		
 		back = new JButton("Back");
+		back.setCursor(cus);
 		back.setBounds(260,390,150,30);
+		back.setBackground(Color.WHITE);
 		back.addActionListener(this);
 		add(back);
 		
@@ -118,7 +126,11 @@ public class Single extends JFrame implements ActionListener {
 
 		
 		if(e.getSource()==book) {
-		
+			if(((JTextField)checkindate.getDateEditor().getUiComponent()).getText().length()==0) {
+				JOptionPane.showMessageDialog(null, "pls enter check in date");
+			
+			}
+			else {
 			int id = 0;
 			String number = num.getSelectedItem().toString();
 			String checkin = ((JTextField)checkindate.getDateEditor().getUiComponent()).getText();
@@ -151,7 +163,8 @@ public class Single extends JFrame implements ActionListener {
 //			catch(Exception ex) {
 //				System.out.println("Error : "+ex.getMessage());
 //			}
-		} else {
+		} 
+		else {
 
 		JOptionPane.showMessageDialog(null, "Failed to Book");
 		}
@@ -160,10 +173,12 @@ public class Single extends JFrame implements ActionListener {
 	
 
 		}
+		}
 		if(e.getSource()==back) {
 			this.dispose();
 		}
 	}
+	
 
 		// TODO Auto-generated method stub
 		

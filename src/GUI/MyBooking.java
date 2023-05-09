@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -8,11 +10,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
-import javax.print.attribute.HashPrintJobAttributeSet;
+
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,15 +23,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import javax.swing.table.DefaultTableModel;
+
 import com.toedter.calendar.JDateChooser;
 
-import Middleware.UserMiddleWare;
-import Middleware.roomMiddleWare;
+
 
 
 public class MyBooking extends JFrame implements ActionListener {
@@ -44,13 +42,19 @@ public class MyBooking extends JFrame implements ActionListener {
 	JTextField prise,id;
 	JDateChooser in ,out ;
 	public MyBooking() {
+		Cursor cus = new Cursor(Cursor.HAND_CURSOR);
+		
 		setTitle("Veiw My booking");
+		getContentPane().setBackground(Color.decode("#686A6C"));
+		ImageIcon image = new ImageIcon("62fb3e321387b24cd8fd10a8_Hotel-logo.png");
+		setIconImage(image.getImage());
 		setSize(800,600);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setResizable(false);
 		
 		checkIndate = new JLabel("Check in date:");
+		checkIndate.setForeground(Color.WHITE);
 		checkIndate.setBounds(80,50,100,50);
 		add(checkIndate);
 		
@@ -61,6 +65,7 @@ public class MyBooking extends JFrame implements ActionListener {
 		
 		
 		checkOutDate = new JLabel("Check out date:");
+		checkOutDate.setForeground(Color.WHITE);
 		checkOutDate.setBounds(455,60,100,30);
 		add(checkOutDate);	
 		
@@ -70,6 +75,7 @@ public class MyBooking extends JFrame implements ActionListener {
 		
 		
 		roomType = new JLabel("Room Type:");
+		roomType.setForeground(Color.WHITE);
 		roomType.setBounds(80,120,100,50);
 		add(roomType);	
 		
@@ -83,6 +89,7 @@ public class MyBooking extends JFrame implements ActionListener {
 		
 		
 		noOfGuest = new JLabel("No of guest:");
+		noOfGuest.setForeground(Color.WHITE);
 		noOfGuest.setBounds(320,120,100,50);
 		add(noOfGuest);	
 		
@@ -91,7 +98,8 @@ public class MyBooking extends JFrame implements ActionListener {
 		No.setBounds(400,130,100,30);
 		add(No);
 		
-		prize = new JLabel("Prize:");
+		prize = new JLabel("Price:");
+		prize.setForeground(Color.WHITE);
 		prize.setBounds(520,130,100,30);
 		add(prize);	
 		
@@ -106,6 +114,7 @@ public class MyBooking extends JFrame implements ActionListener {
 		add(id);
 		
 		back = new JButton("Back");
+		back.setCursor(cus);
 		back.setBounds(560,210,150,30);
 		back.setFocusable(false);
 		back.addActionListener(this);
@@ -136,6 +145,7 @@ public class MyBooking extends JFrame implements ActionListener {
 		edit = new JButton("Update");
 		edit.setBounds(80,210,150,30);
 		edit.setFocusable(false);
+		edit.setCursor(cus);
 		edit.addActionListener( new ActionListener() {
 			
 			@Override
@@ -148,7 +158,6 @@ public class MyBooking extends JFrame implements ActionListener {
 					String ty = (String) type.getSelectedItem();
 					String no = No.getSelectedItem().toString();
 				
-					
 					int row = datas.getSelectedRow();
 					if(row==-1) {
 						JOptionPane.showMessageDialog(null, "please selected the row first");
@@ -212,6 +221,7 @@ public class MyBooking extends JFrame implements ActionListener {
 		
 		
 		cancel = new JButton("Cancel");
+		cancel.setCursor(cus);
 		cancel.setBounds(320,210,150,30);
 		cancel.setFocusable(false);
 		cancel.addActionListener( new ActionListener() {
@@ -273,7 +283,7 @@ public class MyBooking extends JFrame implements ActionListener {
 				+ "FROM user\r\n"
 				+ "JOIN booking\r\n"
 				+ "ON booking.User_Id = user.uid\r\n"
-				+ "WHERE user.uid = ? ";
+				+ "WHERE booking.User_Id = ? ";
 		try {
 //			UserMiddleWare user = new UserMiddleWare();
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/hotel_luton", "root","");

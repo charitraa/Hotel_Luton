@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,22 +13,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Booking extends JFrame implements ActionListener {
+	
+	//Deceleration
 	JLabel book,singleimage , doubleimage, twinimage, lsingle,ldouble,ltwin,fsingle,fdueo,ftwin;
 	JButton view , logout, sinbook, dueobbok,twinbook;
 	JPanel single , dueo, twin ;
 	
+	//creating methods
 	public Booking() {
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setTitle("Booking Page");
+		ImageIcon image = new ImageIcon("62fb3e321387b24cd8fd10a8_Hotel-logo.png");
+		setIconImage(image.getImage());
+		
+		//SetJframe
 		setSize(1000,800);
 		setLayout(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		Cursor cus = new Cursor(Cursor.HAND_CURSOR);
 		
+		
+		
+		
+	
 		book = new JLabel("Room Type");
-		book.setFont(new Font("serif",Font.BOLD,30));
+		book.setFont(new Font("serif",Font.BOLD,40));
 		book.setForeground(Color.WHITE);
-		book.setBounds(440,30,150,50);
+		book.setBounds(420,30,200,50);
 		
 		single = new JPanel();
 		single.setBackground(Color.WHITE);
@@ -48,15 +61,19 @@ public class Booking extends JFrame implements ActionListener {
 		twin.setLayout(null);
 		
 		view = new JButton("My Booking");
+		view.setBackground( Color.white);
 		view.setBounds(40,50,100,30);
 		view.setFocusable(false);
 		view.addActionListener(this);
 //		view.setOpaque(false);
+		view.setCursor(cus);
 		
 		logout = new JButton("Logout");
+		logout.setBackground( Color.white);
 		logout.setBounds(840,50,100,30);
 		logout.addActionListener(this);
 		logout.setFocusable(false);
+		logout.setCursor(cus); 
 		
 		singleimage = new JLabel();
 		singleimage.setBounds(10,0,300,200);
@@ -105,20 +122,27 @@ public class Booking extends JFrame implements ActionListener {
 		
 		sinbook = new JButton("Book Now");
 		sinbook.setBounds(700,60,150,50);
+		
 		sinbook.setFocusable(false);
+		sinbook.setBackground( Color.decode("#5ADEFE"));
 		sinbook.addActionListener(this);
+		sinbook.setCursor(cus);
 		single.add(sinbook);
 		
 		dueobbok = new JButton("Book Now");
 		dueobbok.setBounds(700,60,150,50);
+		dueobbok.setBackground( Color.decode("#5ADEFE"));
 		dueobbok.addActionListener(this);
 		dueobbok.setFocusable(false);
+		dueobbok.setCursor(cus);
 		dueo.add(dueobbok);
 		
 		twinbook = new JButton("Book Now");
 		twinbook.setBounds(700,60,150,50);
 		twinbook.addActionListener(this);
+		twinbook.setBackground( Color.decode("#5ADEFE"));
 		twinbook.setFocusable(false);
+		twinbook.setCursor(cus);
 		twin.add(twinbook);
 		
 		
@@ -129,6 +153,7 @@ public class Booking extends JFrame implements ActionListener {
 		
 		setVisible(true);
 	}
+	//main methods
 	public static void main(String[] args) {
 		new Booking();
 	}
