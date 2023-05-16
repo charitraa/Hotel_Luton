@@ -5,10 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
@@ -20,13 +17,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.text.DefaultCaret;
-import javax.swing.text.DefaultHighlighter;
-import javax.swing.text.Highlighter;
+
 
 import com.toedter.calendar.JDateChooser;
-
-import JDBC.Contollers;
+import JDBC.Jdbc;
 import Middleware.UserMiddleWare;
 import Middleware.NonCorporateMiddleWare;
 
@@ -45,7 +39,7 @@ public class Noncorporate extends JFrame implements ActionListener{
 	
 	public Noncorporate() {
 		//make the whole Screen White
-		getContentPane().setBackground(Color.WHITE);
+		getContentPane().setBackground(Color.decode("#667579"));
 //..................Add Frame......................
 		setTitle("Register Page");
 		setSize(500,600);
@@ -60,11 +54,13 @@ public class Noncorporate extends JFrame implements ActionListener{
 		
 //...........Add Label......................
 		rgister = new JLabel("REGISTER FORM");
+		rgister.setForeground(Color.WHITE);
 		rgister.setBounds(120,40,300,50);
 		rgister.setFont( new Font("serif", Font.BOLD,30));
 		
 //.............add RadioButton................................
 		noCorporate = new JRadioButton("Non-Corporate");
+		noCorporate.setForeground(Color.WHITE);
 		noCorporate.setBounds(120,120,150,30);
 		noCorporate.setSelected(true);//make the button to me selected
 //		noCorporate.setFocusable(false);
@@ -72,6 +68,7 @@ public class Noncorporate extends JFrame implements ActionListener{
 		noCorporate.setCursor(cus);
 		
 		corporate = new JRadioButton("Corporate");
+		corporate.setForeground(Color.WHITE);
 		corporate.setBounds(280,120,150,30);
 		corporate.setFocusable(false);
 		corporate.setOpaque(false);
@@ -81,108 +78,76 @@ public class Noncorporate extends JFrame implements ActionListener{
 	
 		name = new JLabel() ;
 		name.setText("Full Name");
+		name.setForeground(Color.WHITE);
 		name.setBounds(70,170,100,30);
 		
 		firsttxt = new JTextField();
+		firsttxt.setToolTipText("enter your first name");
 		firsttxt.setBounds(70,200,100,30);
-//		firsttxt.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(firsttxt.getText().isEmpty()) {
-//					firsttxt.setText("First Name");
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(firsttxt.getText().equals("First Name")) {
-//					firsttxt.setText("");
-//				}
-//			}
-//		});
+
 		
 		middletxt = new JTextField();
+		middletxt.setToolTipText("enter your middle name");
 		middletxt.setBounds(185,200,100,30);
-//		middletxt.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(middletxt.getText().isEmpty()) {
-//					middletxt.setText("Middle Name");
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(middletxt.getText().equals("")) {
-//					middletxt.setText("");
-//				}
-//			}
-//		});
+
 		
 		lastname = new JTextField();
+		lastname.setToolTipText("enter your last name");
 		lastname.setBounds(300,200,100,30);
-//		lastname.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(lastname.getText().isEmpty()) {
-//					lastname.setText("Last Name");
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(lastname.getText().equals("Last Name")) {
-//					lastname.setText("");
-//				}
-//			}
-//		});
+
 		
 		dobb = new JLabel("Date of Birth");
+		dobb.setForeground(Color.WHITE);
 		dobb.setBounds(70,230,150,30);
 		
 		dob= new JDateChooser();
 		dob.setBounds(70,260,150,30);
 		
 		country = new JLabel("Country");
+		
+		country.setForeground(Color.WHITE);
 		country.setBounds(250,230,100,30);
 		
 		countrytxt = new JTextField();
+		countrytxt.setToolTipText("enter your country name");
 		countrytxt.setBounds(250,260,150,30);
 		
 		address = new JLabel("Address");
+		address.setToolTipText("enter your Address");
+		address.setForeground(Color.WHITE);
 		address.setBounds(71,290,150,30);
 		
 		addresstxt = new JTextField();
 		addresstxt.setBounds(71,320,150,30);
 		
 		phoneNumber = new JLabel("Phone Number");
+		phoneNumber.setToolTipText("enter your Phone number");
+		phoneNumber.setForeground(Color.WHITE);
 		phoneNumber.setBounds(250,290,150,30);
 		
 		phonetxt = new JTextField();
 		phonetxt.setBounds(250,320,150,30);
 		
 		gender = new JLabel("  Sex :");
+		gender.setForeground(Color.WHITE);
 		gender.setBounds(71,358,100,30);
 		
 		male = new JRadioButton("Male");
+		male.setForeground(Color.WHITE);
 		male.setBounds(130,360,100,30);
 		male.setFocusable(false);
 		male.setOpaque(false);
 		male.setCursor(cus);
 	
 		female = new JRadioButton("Female");
+		female.setForeground(Color.WHITE);
 		female.setBounds(220,360,100,30);
 		female.setFocusable(false);
 		female.setOpaque(false);
 		female.setCursor(cus);
 		
 		other = new JRadioButton("Others");
+		other.setForeground(Color.WHITE);
 		other.setBounds(320,360,100,30);
 		other.setFocusable(false);
 		other.setOpaque(false);
@@ -194,54 +159,23 @@ public class Noncorporate extends JFrame implements ActionListener{
 		group.add(other);
 
 		email = new JLabel("Email");
+		email.setForeground(Color.WHITE);
 		email.setBounds(71,400,100,30);
 		
 		emailtxt = new JTextField();
+		emailtxt.setToolTipText("enter your Email");
 		emailtxt.setBounds(71,430,150,30);
-//		emailtxt.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(emailtxt.getText().isEmpty()) {
-//					emailtxt.setText("Email");
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(emailtxt.getText().equals("Email")) {
-//					emailtxt.setText("");
-//				}
-//			}
-//		});
+
 		
 		pass = new JLabel(" Create Password");
+		
+		pass.setForeground(Color.WHITE);
 		pass.setBounds(250,400,100,30);
 		
 		password = new JPasswordField();
+		password.setToolTipText("create a password");
 		password.setBounds(250,430,150,30);	
-//		password.setEchoChar((char) 0);
-//		password.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(new String(password.getPassword()).isEmpty() ){
-//					password.setText("Create a password");
-//					password.setEchoChar((char)0);
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(new String(password.getPassword()).equals("Create a password")) {
-//					password.setText("");
-//					password.setEchoChar('*');
-//				}
-//			}
-//		});
-//		
+	
 		register = new  JButton("Continue");
 		register.setBounds(71,490,150,30);
 		register.addActionListener(this);
@@ -299,6 +233,7 @@ public class Noncorporate extends JFrame implements ActionListener{
 		if(e.getSource()==back) {
 			this.dispose();
 			
+			
 		}
 		if(e.getSource()==register) {
 			if(firsttxt.getText().length()==0 && lastname.getText().length()==0 && middletxt.getText().length()==0 &&
@@ -314,6 +249,29 @@ public class Noncorporate extends JFrame implements ActionListener{
 					 emailtxt.getText().length()==0 || male.getText().isEmpty() || female.getText().isEmpty() || other.getText().isEmpty()||
 					password.getText().length()==0) {
 				JOptionPane.showMessageDialog(null, "Pls fill the registration form proberly");
+			}
+			else if(phonetxt.getText().length() <10 && phonetxt.getText().length() !=0 ) {
+		 		JOptionPane.showMessageDialog(null, "phone number should include 10 digits");
+		 	}
+			else if(password.getText().length()<8 && password.getText().length()!=0 ) {
+				JOptionPane.showMessageDialog(null, "password length should include 8 or more character");
+			}
+			else if(!(password.getText().contains("@")|| password.getText().contains("#")
+		              || password.getText().contains("!") || password.getText().contains("~")
+		              || password.getText().contains("$") || password.getText().contains("%")
+		              || password.getText().contains("^") || password.getText().contains("&")
+		              || password.getText().contains("*") || password.getText().contains("(")
+		              || password.getText().contains(")") || password.getText().contains("-")
+		              || password.getText().contains("+") || password.getText().contains("/")
+		              || password.getText().contains(":") || password.getText().contains(".")
+		              || password.getText().contains(",") || password.getText().contains("<")
+		              || password.getText().contains(">") || password.getText().contains("?")
+		              || password.getText().contains("|"))) {
+				
+				JOptionPane.showMessageDialog(null, "Password should contain at least one special character");
+			}
+			else if (password.getText().contains(" ")) {
+				JOptionPane.showMessageDialog(null, "Password should not contain any space");
 			}
 			else {
 			
@@ -338,22 +296,34 @@ public class Noncorporate extends JFrame implements ActionListener{
 			} else if (other.isSelected()) {
 
 				sex = "Other";
-
 			}
-			String email = emailtxt.getText();
-			String pass = password.getText();
-			
-			NonCorporateMiddleWare Noncorporate = new NonCorporateMiddleWare(customerId, firstname, secondname, lastnam, date, country, address, phone, sex, email,pass);
-			boolean result = new Contollers().register1(Noncorporate);
-			
 			int uid = 0;
 			String emaill = emailtxt.getText();
 			String passs = password.getText();
-			UserMiddleWare Login = new UserMiddleWare( uid,emaill,passs);
-			boolean result1 = new Contollers().login(Login);
-			if (result == true && result1 == true) {
+			UserMiddleWare Login = new UserMiddleWare( uid, emaill,passs);
+			boolean result1 = new Jdbc().logins(Login);
+			if(result1 == true) {
+				JOptionPane.showMessageDialog(null, "Register successfully");
+				
+				firsttxt.setText("");
+				middletxt.setText("");
+				lastname.setText("");
+				dob.setToolTipText("");
+				countrytxt.setText("");
+				addresstxt.setText("");
+				phonetxt.setText("");
+				emailtxt.setText("");
+				password.setText(""); 
+				} else {
 
-			JOptionPane.showMessageDialog(null, "Register successfully");
+				JOptionPane.showMessageDialog(null, "Failed to Register");
+
+				}
+			NonCorporateMiddleWare Noncorporate = new NonCorporateMiddleWare(firstname, secondname, lastnam, date, country, address, phone, sex);
+			boolean result = new Jdbc().register1(Noncorporate);			
+			 if(result == true ) {
+
+			JOptionPane.showMessageDialog(null, "your account is active");
 			
 			firsttxt.setText("");
 			middletxt.setText("");
@@ -363,18 +333,21 @@ public class Noncorporate extends JFrame implements ActionListener{
 			addresstxt.setText("");
 			phonetxt.setText("");
 			emailtxt.setText("");
-			password.setText(""); 
+			password.setText("");
+			this.dispose();
+			Login log = new Login();
 			} else {
 
 			JOptionPane.showMessageDialog(null, "Failed to Register");
 
 			}
-
 			}
-
 			
+
+		
 	}
 	}
 	}
+	
 	
 

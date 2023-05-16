@@ -1,8 +1,14 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,8 +19,9 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import JDBC.Contollers;
+import JDBC.Jdbc;
 import Middleware.BookingMiddleWare;
+
 
 public class Dueo extends JFrame implements ActionListener {
 	
@@ -23,8 +30,10 @@ public class Dueo extends JFrame implements ActionListener {
 	JDateChooser  checkindate , checkoutdate;
 	JButton book , back;
 	JTextField type,prise;
-	JComboBox num;
+	JComboBox num,rooms;
 	public Dueo() {
+		getContentPane().setBackground(Color.decode("#93917C"));
+		Cursor cus = new Cursor(Cursor.HAND_CURSOR);
 		setTitle("Double booking page");
 		setSize(500,500);
 		setLayout(null);
@@ -45,12 +54,8 @@ public class Dueo extends JFrame implements ActionListener {
 		checkout = new JLabel("Check Out Date:");
 		checkout.setBounds(80,220,150,30);
 		add(checkout);
-		
-		room = new JLabel("Room:");
-		room.setBounds(80,320,150,30);
-		add(room);
-		
-		type = new JTextField("Twin");
+	
+		type = new JTextField("Double");
 		type.setBounds(160,120,100,30);
 		type.setEnabled(false);
 		add(type);
@@ -64,16 +69,20 @@ public class Dueo extends JFrame implements ActionListener {
 		checkoutdate.setBounds(180,220,150,30);
 		add(checkoutdate);
 		
-		String types[] = {}; 
-		JComboBox room = new JComboBox(types);
-		room.setBounds(130,320,120,30);
-		add(room);
+		
+
+		
 		
 		book = new JButton("Book");
+		book.setCursor(cus);
+		book.setBackground(Color.WHITE);
 		book.setBounds(80,390,150,30);
+		book.addActionListener(this);
 		add(book);
 		
 		back = new JButton("Back");
+		back.setCursor(cus);
+		back.setBackground(Color.WHITE);
 		back.setBounds(260,390,150,30);
 		back.addActionListener(this);
 		add(back);
@@ -88,12 +97,12 @@ public class Dueo extends JFrame implements ActionListener {
 		add(num);
 		
 		prize = new JLabel("Prize:");
-		prize.setBounds(270, 320, 100 ,30);
+		prize.setBounds(80,320,150,30);
 		add(prize);
 		
 		prise = new JTextField(" 4000");
 		prise.setEnabled(false);
-		prise.setBounds(310,320,100,30);
+		prise.setBounds(130,320,100,30);
 		add(prise);
 		
 		setVisible(true);
@@ -105,33 +114,26 @@ public class Dueo extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==book) {
-			int bookingId = 0;
+			
+			int id = 0;
 			String number = num.getSelectedItem().toString();
 			String checkin = ((JTextField)checkindate.getDateEditor().getUiComponent()).getText();
 			String checkout =((JTextField)checkoutdate.getDateEditor().getUiComponent()).getText();
 			String bookingstatus = "pending";
+			String RoomType = type.getText();
 			
-			BookingMiddleWare booking = new BookingMiddleWare(bookingId,number,checkin,checkout,bookingstatus);
-			boolean result = new Contollers().book(booking);
-			
-//			int uid = 0;
-//			String emaill = emailtxt.getText();
-//			String passs = password.getText();
-//			UserMiddleWare Login = new UserMiddleWare( uid,emaill,passs);
-//			boolean result1 = new Contollers().login(Login);
-			
-			
-			
+			BookingMiddleWare booking = new BookingMiddleWare(id, number,checkin,checkout,bookingstatus, RoomType);
+			boolean result = new Jdbc().book(booking);	
 			if (result ==true) {
 
 			JOptionPane.showMessageDialog(null, "Booking sucessfull");
-	 
+			this.dispose();
 			} else {
 
-			JOptionPane.showMessageDialog(null, "Failed to Register");
+			JOptionPane.showMessageDialog(null, "Failed to Book");
 
 			}
-
+			
 			}
 		if(e.getSource()==back) {
 			this.dispose();

@@ -53,55 +53,22 @@ public class Login extends JFrame implements ActionListener {
 		log.setFont(new Font("serif", Font.BOLD,30));
 		
 		user = new JLabel("Email");
+		
 		user.setBounds(90, 160, 100, 30);
 		
 		txtUser = new JTextField();
+		txtUser.setToolTipText("Enter your Email");
 		txtUser.setBounds(90, 190, 180, 30);
-//		txtUser.setToolTipText("Enter your Email");
-//		txtUser.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(txtUser.getText().isEmpty()) {
-//					txtUser.setText("Email");
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(txtUser.getText().equals("Email")) {
-//					txtUser.setText("");
-//				}
-//			}
-//		});
+
 		
 		pass = new JLabel("password");
+		
 		pass.setBounds(90,220,100,30);
 		
 		txtPass = new JPasswordField();
 		txtPass.setBounds(90, 255, 180, 30);
 		txtPass.setToolTipText("Enter your password");
-//		txtPass.setEchoChar((char) 0);
-//		txtPass.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(new String(txtPass.getPassword()).isEmpty() ){
-//					txtPass.setText("password");
-//					txtPass.setEchoChar((char)0);
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(new String(txtPass.getPassword()).equals("password")) {
-//					txtPass.setText("");
-//					txtPass.setEchoChar('*');
-//				}
-//			}
-//		});
+
 		
 		show = new JCheckBox("Show Password");
 		show.setBounds(150,285,120,30);
@@ -118,6 +85,8 @@ public class Login extends JFrame implements ActionListener {
 		
 		btnLogin=new JButton();
 		btnLogin.addActionListener(this);
+		btnLogin.setBackground(Color.decode("#6698FF"));
+		btnLogin.setForeground(Color.WHITE);
 		btnLogin.setBounds(90, 320, 180, 30);
 		btnLogin.setText("Login");
 		btnLogin.setCursor(cus);
@@ -170,7 +139,9 @@ public class Login extends JFrame implements ActionListener {
 			user.setPassword(txtPass.getText());
 			control.setUser(user);
 			control.login();
+			control.login1();
 			user = control.getUser();
+			
 			
 			if(txtUser.getText().length()==0 && txtPass.getText().length()==0) {
 				JOptionPane.showMessageDialog(null,"Pls enter your Email and Password");
@@ -181,11 +152,20 @@ public class Login extends JFrame implements ActionListener {
 			else if (txtPass.getText().length()==0) {
 				JOptionPane.showMessageDialog(null,"Pls enter your Password");
 			}
-			else if(user.getUid()>=1) {
+			else if(user.getUid()>1) {
+				test.userid = user.getUid();
 				JOptionPane.showMessageDialog(this, "Welcome to hotel luton!");
-				Booking book = new Booking();
+				this.dispose();
+				Booking book = new Booking();	
+			}
+			else if(user.getUid()==1) {
+				
+				JOptionPane.showMessageDialog(this, "Login Sucessfull");
+				this.dispose();
+				StaffDashboard staf = new StaffDashboard();
 				
 			}
+			
 			else {
 				JOptionPane.showMessageDialog(this, "Error: user/password");
 			}

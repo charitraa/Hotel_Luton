@@ -33,7 +33,7 @@ public class HomePage extends JFrame implements ActionListener{
 		ImageIcon image = new ImageIcon("62fb3e321387b24cd8fd10a8_Hotel-logo.png");
 		setIconImage(image.getImage());
 		labelHotel = new JLabel("HOTEL LUTON");
-		labelHotel.setBounds(100, 10, 300, 50);
+		labelHotel.setBounds(100, 20, 300, 50);
 		labelHotel.setFont(new Font("College", Font.BOLD,30));
 		labelHotel.setForeground(Color.WHITE);
 		

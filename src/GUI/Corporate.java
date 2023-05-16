@@ -9,6 +9,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +20,8 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import JDBC.Contollers;
+
+import JDBC.Jdbc;
 import Middleware.*;
 
 public class Corporate extends JFrame implements ActionListener{
@@ -31,8 +33,9 @@ public class Corporate extends JFrame implements ActionListener{
 	JPasswordField password;
 	ButtonGroup group;
 	public Corporate() {
-		getContentPane().setBackground(Color.WHITE);
+		getContentPane().setBackground(Color.decode("#888789"));
 		setTitle("Register Page");
+		
 		setSize(500,600);
 		setLayout(null);
 		setLocationRelativeTo(null);
@@ -41,10 +44,13 @@ public class Corporate extends JFrame implements ActionListener{
 		setUndecorated(true);
 		
 		rgister = new JLabel("REGISTER FORM");
+		
 		rgister.setBounds(120,40,300,50);
 		rgister.setFont( new Font("serif", Font.BOLD,30));
+		rgister.setForeground(Color.WHITE);
 		
 		noCorporate = new JRadioButton("Non-Corporate");
+		noCorporate.setForeground(Color.WHITE);
 		noCorporate.setBounds(120,120,150,30);
 		noCorporate.addActionListener(this);
 		noCorporate.setFocusable(false);
@@ -52,6 +58,7 @@ public class Corporate extends JFrame implements ActionListener{
 		noCorporate.setCursor(cus);
 		
 		corporate = new JRadioButton("Corporate");
+		corporate.setForeground(Color.WHITE);
 		corporate.setBounds(280,120,150,30);
 		corporate.setFocusable(false);
 		corporate.setOpaque(false);
@@ -65,6 +72,7 @@ public class Corporate extends JFrame implements ActionListener{
 		
 		cname = new JLabel() ;
 		cname.setText("Company Name");
+		cname.setForeground(Color.WHITE);
 		cname.setBounds(70,170,100,30);
 		
 		companytxt = new JTextField();
@@ -73,102 +81,93 @@ public class Corporate extends JFrame implements ActionListener{
 		
 		doe = new JLabel("Establish Date");
 		doe.setBounds(70,230,150,30);
+		doe.setForeground(Color.WHITE);
 		
 		dob= new JDateChooser();
 		dob.setBounds(70,260,150,30);
 		
 		country = new JLabel("Country");
 		country.setBounds(250,230,100,30);
+		country.setForeground(Color.WHITE);
 		
 		countrytxt = new JTextField();
+		countrytxt.setToolTipText("enter your country name");
 		countrytxt.setBounds(250,260,150,30);
 		
 		address = new JLabel("Address");
+		address.setForeground(Color.WHITE);
 		address.setBounds(71,290,150,30);
 		
 		addresstxt = new JTextField();
+		addresstxt.setToolTipText("enter your Address");
+
 		addresstxt.setBounds(71,320,150,30);
 		
 		phoneNumber = new JLabel("Phone Number");
+		phoneNumber.setForeground(Color.WHITE);
 		phoneNumber.setBounds(250,290,150,30);
 		
 		phonetxt = new JTextField();
+		phonetxt.setToolTipText("enter your Phone No");
+
 		phonetxt.setBounds(250,320,150,30);
 		
 		creditCard = new JLabel("Credit Card No");
 		creditCard.setBounds(71,350,100,30);
+		creditCard.setForeground(Color.WHITE);
 		
 		creditCardNo = new JTextField();
+		creditCardNo.setToolTipText("enter your Credit Card No");
+
 		creditCardNo.setBounds(71,380,150,30);
 		
 		cvc = new JLabel("CVC");
+		cvc.setForeground(Color.WHITE);
 		cvc.setBounds(250,350,100,30);
 		
 		cvcNo = new JTextField();
+		cvcNo.setToolTipText("enter your CVC");
+
 		cvcNo.setBounds(250,380,150,30);
 
 		email = new JLabel("Email");
+		email.setForeground(Color.WHITE);
+		email.setToolTipText("enter your Email");
+
 		email.setBounds(71,410,100,30);
 		
 		emailtxt = new JTextField();
 		emailtxt.setBounds(71,440,150,30);
-//		emailtxt.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(emailtxt.getText().isEmpty()) {
-//					emailtxt.setText("Email");
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(emailtxt.getText().equals("Email")) {
-//					emailtxt.setText("");
-//				}
-//			}
-//		});
 		
 		
 		
 		pass = new JLabel("Create a Password");
+		pass.setToolTipText("Create a Passord");
+
+		pass.setForeground(Color.WHITE);
 		pass.setBounds(250,410,150,30);
 		
 		password = new JPasswordField();
 		password.setBounds(250,440,150,30);
-//		password.setEchoChar((char) 0);
-//		password.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				if(new String(password.getPassword()).isEmpty() ){
-//					password.setText("Create a password");
-//					password.setEchoChar((char)0);
-//				}
-//				
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				if(new String(password.getPassword()).equals("Create a password")) {
-//					password.setText("");
-//					password.setEchoChar('*');
-//				}
-//			}
-//		});
-		
 		register = new  JButton("Continue");
+		register.setBackground(Color.decode("#505457"));
+		register.setForeground(Color.WHITE);
+		register.setFocusPainted(false);
+		
 		register.setBounds(71,490,150,30);
 		register.addActionListener(this);
-		register.setOpaque(false);
+		
 		register.setCursor(cus);
 
 		
 		back = new JButton("Back");
+		
+		back.setBackground(Color.decode("#505457"));
+		back.setForeground(Color.WHITE);
+		back.setFocusPainted(false);
 		back.setBounds(250,490, 150,30);
 		back.addActionListener(this);
-		back.setOpaque(false);
+		//back.setOpaque(false);
 		back.setCursor(cus);
 
 		add(back);
@@ -263,14 +262,13 @@ public class Corporate extends JFrame implements ActionListener{
 			String phone = phonetxt.getText();
 			String creditNo = creditCardNo.getText();
 			String cvc = cvcNo.getText();
-			String email = emailtxt.getText();
-			String pass = password.getText();
-			String emaill = emailtxt.getText();
+
+
 			int uid = 0;
 			String emails = emailtxt.getText();
 			String passs = password.getText();
-			UserMiddleWare Login = new UserMiddleWare( uid,emails,passs);
-			boolean result1 = new Contollers().login(Login);
+			UserMiddleWare Login = new UserMiddleWare( uid, emails,passs);
+			boolean result1 = new Jdbc().logins(Login);
 			if (result1 ==true) {
 
 				JOptionPane.showMessageDialog(null, "Register successfully");
@@ -288,11 +286,11 @@ public class Corporate extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Failed to Register");
 
 				}
-				CorporateMiddleWare corporate = new CorporateMiddleWare(corporateId,name,date,country,address,phone,creditNo,cvc,email,pass,emaill);
-				boolean result = new Contollers().register(corporate);
+				CorporateMiddleWare corporate = new CorporateMiddleWare(name,date,country,address,phone,creditNo,cvc);
+				boolean result = new Jdbc().register(corporate);
 				
 			if (result == true) {
-			JOptionPane.showMessageDialog(null, "Register successfully");
+			JOptionPane.showMessageDialog(null, "Your account is active");
 //			Booking book = new Booking();
 			companytxt.setText("");
 			dob.setToolTipText("");
@@ -302,9 +300,10 @@ public class Corporate extends JFrame implements ActionListener{
 			creditCardNo.setText("");
 			emailtxt.setText("");
 			password.setText(""); 
+			Login log = new Login(); 
 			} else {
 
-			JOptionPane.showMessageDialog(null, "Failed to Register");
+			JOptionPane.showMessageDialog(null, "something you missed");
 
 			}
 

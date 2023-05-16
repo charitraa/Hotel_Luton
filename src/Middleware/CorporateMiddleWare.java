@@ -2,9 +2,9 @@ package Middleware;
 
 public class CorporateMiddleWare {
 	public String name,date,country,address,phonenumber,creditCard,cvc,email,password,femail;
-	public int corporateId;
+	
 	public CorporateMiddleWare() {
-		this.corporateId=0;
+		
 		this.name = "";
 		this.date = "";
 		this.country = "";
@@ -12,14 +12,11 @@ public class CorporateMiddleWare {
 		this.phonenumber = "";
 		this.creditCard = "";
 		this.cvc = "";
-		this.email = "";
-		this.password = "";
-		this.femail = "";
 	}
-	public CorporateMiddleWare(int corporateId, String name, String date, String country, String address, String phonenumber, String creditCard,
-			String cvc, String email, String password, String femail) {
+	public CorporateMiddleWare(String name, String date, String country, String address, String phonenumber, String creditCard,
+			String cvc) {
 		
-		this.corporateId=corporateId;
+		
 		this.name = name;
 		this.date = date;
 		this.country = country;
@@ -27,9 +24,7 @@ public class CorporateMiddleWare {
 		this.phonenumber = phonenumber;
 		this.creditCard = creditCard;
 		this.cvc = cvc;
-		this.email = email;
-		this.password = password;
-		this.femail = femail;
+
 	}
 	public String getName() {
 		return name;
@@ -91,17 +86,13 @@ public class CorporateMiddleWare {
 	public void setFemail(String femail) {
 		this.femail = femail;
 	}
-	public int getCorporateId() {
-		return corporateId;
-	}
-	public void setCorporateId(int corporateId) {
-		this.corporateId = corporateId;
-	}
+	
+	
 	@Override
 	public String toString() {
 		return "CorporateMiddleWare [name=" + name + ", date=" + date + ", country=" + country + ", address=" + address
 				+ ", phonenumber=" + phonenumber + ", creditCard=" + creditCard + ", cvc=" + cvc + ", email=" + email
-				+ ", password=" + password + ", femail=" + femail + ", corporateId=" + corporateId + "]";
+				+ ", password=" + password + ", femail=" + femail + "]";
 	}
 	
 }

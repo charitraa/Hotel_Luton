@@ -1,33 +1,33 @@
 package Middleware;
 
 public class BookingMiddleWare {
-	int bookingId;
-	String checkInDate , checkOutdate,bookingStatus,numberOfGuest,room;
+	private int bookingid;
+	 private String checkInDate , checkOutdate,bookingStatus,numberOfGuest,type;
 	
 	public BookingMiddleWare() {
-		super();
-		this.bookingId = 0;
+		
+		this.bookingid = 0;
 		this.numberOfGuest = "";
 		this.checkInDate = "";
 		this.checkOutdate = "";
 		this.bookingStatus = "";
-		this.room="";
+		this.type="";
 	}
-	public BookingMiddleWare(int bookingId, String numberOfGuest, String checkInDate, String checkOutdate,
-			String bookingStatus,String room) {
+	public BookingMiddleWare( int bookingid,String numberOfGuest, String checkInDate, String checkOutdate,
+			String bookingStatus,String type) {
 		super();
-		this.bookingId = bookingId;
+		this.bookingid = bookingid;
 		this.numberOfGuest = numberOfGuest;
 		this.checkInDate = checkInDate;
 		this.checkOutdate = checkOutdate;
 		this.bookingStatus = bookingStatus;
-		this.room=room;
+		this.type = type;
 	}
-	public int getBookingId() {
-		return bookingId;
+	public int getBookingid() {
+		return bookingid;
 	}
-	public void setBookingId(int bookingId) {
-		this.bookingId = bookingId;
+	public void setBookingid(int bookingid) {
+		this.bookingid = bookingid;
 	}
 	public String getCheckInDate() {
 		return checkInDate;
@@ -53,17 +53,21 @@ public class BookingMiddleWare {
 	public void setNumberOfGuest(String numberOfGuest) {
 		this.numberOfGuest = numberOfGuest;
 	}
-	public String getRoom() {
-		return room;
+	public String getType() {
+		return type;
 	}
-	public void setRoom(String room) {
-		this.room = room;
+	public void setType(String type) {
+		this.type = type;
 	}
 	@Override
 	public String toString() {
-		return "BookingMiddleWare [bookingId=" + bookingId + ", checkInDate=" + checkInDate + ", checkOutdate="
-				+ checkOutdate + ", bookingStatus=" + bookingStatus + ", numberOfGuest=" + numberOfGuest + ", room="
-				+ room + "]";
+		return "BookingMiddleWare [bookingid=" + bookingid + ", checkInDate=" + checkInDate + ", checkOutdate="
+				+ checkOutdate + ", bookingStatus=" + bookingStatus + ", numberOfGuest=" + numberOfGuest + ", type="
+				+ type + "]";
 	}
+
+	
+	
+
 	
 }
